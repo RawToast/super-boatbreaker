@@ -33,8 +33,8 @@ public class GameManager : MonoBehaviour {
         lives = 3;
         gameOver = false;
         wonGame = false;
-        paddle.active = true;
-        ball.active = true;
+        paddle.SetActive(true);
+        ball.SetActive(true);
         paddle.GetComponent<Paddle>().ResetPaddle();
         CreateBrickArray();
     }

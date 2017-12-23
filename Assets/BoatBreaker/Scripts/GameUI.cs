@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour {
@@ -51,6 +52,6 @@ public class GameUI : MonoBehaviour {
 
     //Called when the 'MENU' button is pressed
     public void MenuButton() {
-        Application.LoadLevel(0); //Loads the 'Menu' scene
+        SceneManager.LoadScene("Game");
     }
 }

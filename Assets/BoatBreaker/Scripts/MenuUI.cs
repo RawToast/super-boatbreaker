@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuUI : MonoBehaviour {
     public void PlayButton() {
-        Application.LoadLevel(1);
+        SceneManager.LoadScene("Game");
     }
 
     public void QuitButton() {
