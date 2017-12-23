@@ -52,6 +52,6 @@ public class GameUI : MonoBehaviour {
 
     //Called when the 'MENU' button is pressed
     public void MenuButton() {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Menu");
     }
 }
