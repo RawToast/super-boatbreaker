@@ -72,8 +72,8 @@ public class GameManager : MonoBehaviour {
     //Called when there is no bricks left and the player has won
     public void WinGame() {
         wonGame = true;
-        paddle.active = false; //Disables the paddle so it's invisible
-        ball.active = false; //Disables the ball so it's invisible
+        paddle.SetActive(false);
+        ball.SetActive(false); //Disables the ball so it's invisible
         gameUI.SetWin(); //Set the game over UI screen
     }
 
@@ -84,14 +84,11 @@ public class GameManager : MonoBehaviour {
         if (lives < 0) {
             //Are the lives less than 0? Are there no lives left?
             gameOver = true;
-            paddle.active = false; //Disables the paddle so it's invisible
-            ball.active = false; //Disables the ball so it's invisible
+            paddle.SetActive(false);
+            ball.SetActive(false);
             gameUI.SetGameOver(); //Set the game over UI screen
-
-            for (int x = 0; x < bricks.Count; x++) {
-                //Loops through the 'bricks' list
-                Destroy(bricks[x]); //Destory the brick
-            }
+            
+            bricks.ForEach(Destroy);
 
             bricks = new List<GameObject>(); //Resets the 'bricks' list variable
         }

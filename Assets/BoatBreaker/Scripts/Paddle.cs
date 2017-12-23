@@ -2,8 +2,9 @@
 
 public class Paddle : MonoBehaviour {
     public float speed; //The amount of units the paddle will move a second
-    public float minX; //The minimum x position that the paddle can move to
-    public float maxX; //The maximum x position that the paddle can move to
+    
+    [SerializeField] private float minX; //The minimum x position that the paddle can move to
+    [SerializeField] private float maxX; //The maximum x position that the paddle can move to
     public bool canMove; //Determins wether or not the paddle can move
     public Rigidbody2D rig; //The paddle's rigidbody 2D component
 
@@ -32,7 +33,7 @@ public class Paddle : MonoBehaviour {
 
     //Called whenever a trigger has entered this objects BoxCollider2D. The value 'col' is the Collider2D object that has interacted with this one
     void OnTriggerEnter2D(Collider2D col) {
-        if (col.gameObject.tag == "Ball") {
+        if (col.gameObject.CompareTag("Ball")) {
             //Is the colliding object got the tag "Ball"?
             col.gameObject.GetComponent<Ball>()
                 .SetDirection(transform
