@@ -4,7 +4,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour {
     public float speed; //The amount of units that the ball will move each second
     public float maxSpeed; //The maximum speed that the ball can travel at
-    public Vector2 direction; //The Vector2 direction that the ball will move in (eg: diagonal = Vector2(1, 1))
+    Vector2 direction; //The Vector2 direction that the ball will move in (eg: diagonal = Vector2(1, 1))
     public Rigidbody2D rig; //The ball's Rigidbody 2D component
     public GameManager manager; //The GameManager
     bool goingLeft; //Set to true when the ball is going left
@@ -62,8 +62,9 @@ public class Ball : MonoBehaviour {
 
         direction = dir; //Sets the ball's direction to the 'dir' variable
 
-        speed += manager
-            .ballSpeedIncrement; //Increases the speed of the ball by the GameManager's 'ballSpeedIncrement' value
+        //speed += manager.ballSpeedIncrement; //Increases the speed of the ball by the GameManager's 'ballSpeedIncrement' value
+        speed += 0; //make this public on ball probably later - c
+
 
         if (speed > maxSpeed) //Is the speed of the ball more than the 'maxSpeed' value
             speed = maxSpeed;
@@ -84,7 +85,12 @@ public class Ball : MonoBehaviour {
         direction = Vector2.down; //Sets the ball's direction to go down
         StartCoroutine(
             "ResetBallWaiter"); //Starts the 'ResetBallWaiter' coroutine to have the ball wait 1 second before moving
-        manager.LiveLost(); //Calls the 'LiveLost()' function in the GameManager function
+
+
+
+        //manager.LiveLost(); //Calls the 'LiveLost()' function in the GameManager function
+
+        //sacked this off for now as remaking gamemanager - c
     }
 
     //Called to make the ball wait a second before moving. Called when the ball dies and is respawned at the middle of the screen
