@@ -7,8 +7,13 @@ public class Ball : MonoBehaviour {
     public Vector2 direction; //The Vector2 direction that the ball will move in (eg: diagonal = Vector2(1, 1))
     public Rigidbody2D rig; //The ball's Rigidbody 2D component
     public GameManager manager; //The GameManager
-    public bool goingLeft; //Set to true when the ball is going left
-    public bool goingDown; //Set to true xwhen the ball is going down
+    bool goingLeft; //Set to true when the ball is going left
+    bool goingDown; //Set to true xwhen the ball is going down
+
+    
+    [SerializeField] private float wallBounds = 5f;
+    //this sets the width of walls, these wont move the scene walls YET so just dont fuck with it yet - carlo 
+
 
     void Start() {
         transform.position = Vector3.zero; //Sets the ball position to the middle of the screen
@@ -22,13 +27,13 @@ public class Ball : MonoBehaviour {
             direction * speed *
             Time.deltaTime; //Sets the object's rigidbody velocity to the direction multiplied by the speed
 
-        if (transform.position.x > 5 && !goingLeft) {
+        if (transform.position.x > wallBounds && !goingLeft) {
             //Is the ball at the right border and is not going left (heading towards the right border)
             direction = new Vector2(-direction.x,
                 direction.y); //Set the ball's x direction to the opposite so that it moves away from the right border (bouncing look)
             goingLeft = true; //Sets goingLeft to true as the ball is now moving left
         }
-        if (transform.position.x < -5 && goingLeft) {
+        if (transform.position.x < -wallBounds && goingLeft) {
             //Is the ball at the left border and is going left (heading towards the left border)
             direction = new Vector2(-direction.x,
                 direction.y); //Set the ball's x direction to the opposite so that it moves away from the left border (bouncing look)
