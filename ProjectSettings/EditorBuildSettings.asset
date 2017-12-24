@@ -11,3 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/BoatBreaker/Scenes/Menu.unity
     guid: 5cfa0444c30b0c447bfa68051ed65d99
+  - enabled: 1
+    path: Assets/#Scenes/Menu.unity
+    guid: b9d82c6f3054844d4bff1e40e910581e
+  - enabled: 1
+    path: Assets/#Scenes/Main.unity
+    guid: 49174b43d9ef07843844e80b20a36361

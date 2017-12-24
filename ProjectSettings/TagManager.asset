@@ -9,6 +9,7 @@ TagManager:
   - Brick
   - BoatPaddle
   - Cannonball
+  - Block
   layers:
   - Default
   - TransparentFX
