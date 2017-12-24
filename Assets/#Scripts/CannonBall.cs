@@ -37,7 +37,7 @@ public class CannonBall : MonoBehaviour {
             direction = new Vector2(-direction.x, direction.y);
             goingLeft = false;
         }
-        if (transform.position.y > 3 && !goingDown) {
+        if (transform.position.y > 5 && !goingDown) {
             //Is the ball at the top border and not going down (heading towards the top border)
             direction = new Vector2(direction.x, -direction.y);
             goingDown = true;

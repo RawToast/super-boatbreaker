@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Boat : MonoBehaviour {
     public float speed;
@@ -12,14 +13,14 @@ public class Boat : MonoBehaviour {
         if (canMove) {
             if (Input.GetKey(KeyCode.LeftArrow)) {
                 rig.velocity =
-                    new Vector2(-1 * speed * Time.deltaTime, 0); //Set the paddle's rigidbody velocity to move left
+                    new Vector2(-1 * speed * Time.deltaTime, rig.velocity.y);
             }
             else if (Input.GetKey(KeyCode.RightArrow)) {
                 rig.velocity =
-                    new Vector2(1 * speed * Time.deltaTime, 0); //Set the paddle's rigidbody velocity to move right
+                    new Vector2(1 * speed * Time.deltaTime, rig.velocity.y);
             }
             else {
-                rig.velocity = Vector2.zero; //If those keys arn't being pressed, set the velocity to 0
+                rig.velocity = new Vector2(0, rig.velocity.y);
             }
 
             transform.position =
@@ -32,6 +33,31 @@ public class Boat : MonoBehaviour {
         if (collidingObj.gameObject.CompareTag(Tags.CANNONBALL)) {
             collidingObj.gameObject.GetComponent<CannonBall>()
                 .SetDirection(transform.position); // bounce the ball of the paddle
+        }
+        
+        if (collidingObj.gameObject.CompareTag(Tags.SEA)) {
+            if (rig.velocity.y < 0) {
+                rig.velocity =
+                    new Vector2(rig.velocity.x, rig.velocity.y + 0.15f);
+            }
+            else {
+                rig.velocity =
+                    new Vector2(rig.velocity.x, rig.velocity.y + 0.05f);
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collidingObj) { 
+        if (collidingObj.gameObject.CompareTag(Tags.SEA)) {
+            if (rig.velocity.y < 0) {
+                rig.velocity =
+                    new Vector2(rig.velocity.x, rig.velocity.y + 0.15f);
+            }
+            else {
+                rig.velocity =
+                    new Vector2(rig.velocity.x, rig.velocity.y + 0.085f);
+            }
+            
         }
     }
 
