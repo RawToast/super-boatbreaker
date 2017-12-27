@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607845, g: 0.19607845, b: 0.19607845, a: 1}
+  m_Color: {r: 0.19607845, g: 0.19607845, b: 0.19607845, a: 0.85490197}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -260,7 +260,7 @@ RectTransform:
   m_GameObject: {fileID: 311687657}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 100}
-  m_LocalScale: {x: 0.010131712, y: 0.010131712, z: 0.010131712}
+  m_LocalScale: {x: 0.010131713, y: 0.010131713, z: 0.010131713}
   m_Children:
   - {fileID: 953714807}
   - {fileID: 1381933076}
@@ -428,7 +428,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 953714806}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.100006, y: 325.5, z: 0}
+  m_LocalPosition: {x: 0, y: 337.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 311687658}
@@ -436,8 +436,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 38.1, y: -168}
-  m_SizeDelta: {x: 995.2, y: 191.4}
+  m_AnchoredPosition: {x: 0, y: -156}
+  m_SizeDelta: {x: 1170.9, y: 193.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &953714808
 MonoBehaviour:
@@ -450,8 +450,8 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Material: {fileID: 2100000, guid: 6cb9dc0c60f224d62bdea7993e6768f0, type: 3}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.791}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -459,10 +459,10 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 86
-    m_FontStyle: 3
-    m_BestFit: 0
+    m_Font: {fileID: 12800000, guid: 6cb9dc0c60f224d62bdea7993e6768f0, type: 3}
+    m_FontSize: 112
+    m_FontStyle: 1
+    m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 150
     m_Alignment: 4
@@ -471,7 +471,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SUPER BOATBREAKER
+  m_Text: Super BoatBreaker
 --- !u!222 &953714809
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -754,7 +754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607845, g: 0.19607845, b: 0.19607845, a: 1}
+  m_Color: {r: 0.19607845, g: 0.19607845, b: 0.19607845, a: 0.853}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

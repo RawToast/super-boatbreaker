@@ -6,12 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/BoatBreaker/Scenes/Game.unity
-    guid: a965ad0954bae6746a1d168d20957ad8
-  - enabled: 1
-    path: Assets/BoatBreaker/Scenes/Menu.unity
-    guid: 5cfa0444c30b0c447bfa68051ed65d99
-  - enabled: 1
     path: Assets/#Scenes/Menu.unity
     guid: b9d82c6f3054844d4bff1e40e910581e
   - enabled: 1

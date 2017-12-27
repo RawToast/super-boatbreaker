@@ -30,11 +30,6 @@ public class Boat : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D collidingObj) {
-        if (collidingObj.gameObject.CompareTag(Tags.CANNONBALL)) {
-            collidingObj.gameObject.GetComponent<CannonBall>()
-                .SetDirection(transform.position); // bounce the ball of the paddle
-        }
-        
         if (collidingObj.gameObject.CompareTag(Tags.SEA)) {
             if (rig.velocity.y < 0) {
                 rig.velocity =
@@ -63,5 +58,9 @@ public class Boat : MonoBehaviour {
 
     public void ResetPaddle() {
         transform.position = new Vector3(0, transform.position.y, 0); //Sets the paddle's x position to 0
+    }
+
+    public Vector2 velocity() {
+        return rig.velocity;
     }
 }
