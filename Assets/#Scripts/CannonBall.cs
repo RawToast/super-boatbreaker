@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class CannonBall : MonoBehaviour {
@@ -11,7 +12,9 @@ public class CannonBall : MonoBehaviour {
     //this sets the width of walls, these wont move the scene walls YET so just dont fuck with it yet - carlo 
     [SerializeField] private float wallBounds = 5f;
 
-    [SerializeField] private int airSpinDivisor;
+    [SerializeField] private int initialSpinDivisor;
+    
+    [SerializeField] private float airSpinDivisor;
     
     private Vector2 direction;
     private bool goingLeft;
@@ -27,53 +30,50 @@ public class CannonBall : MonoBehaviour {
     
     void Update() {
         
-        direction = new Vector2(direction.x + (spin / airSpinDivisor), direction.y).normalized;
+        direction = new Vector2(direction.x + (spin / initialSpinDivisor), direction.y).normalized;
         rig.velocity = direction * speed * Time.deltaTime;
         
-        ReduceSpin(1.005f);
+        ReduceSpin(airSpinDivisor);
         
         if (transform.position.x > wallBounds && !goingLeft) {
             //Is the ball at the right border and is not going left (heading towards the right border)
-            direction = new Vector2(-direction.x, direction.y + (spin / airSpinDivisor));
-            ReduceSpin();
+            direction = new Vector2(-direction.x, direction.y + (spin / initialSpinDivisor));
+            ReduceSpin(1.8f);
 
             goingLeft = true;
         }
         
         if (transform.position.x < -wallBounds && goingLeft) {
             //Is the ball at the left border and is going left (heading towards the left border)
-            direction = new Vector2(-direction.x, direction.y - (spin / airSpinDivisor));
-            ReduceSpin();
+            direction = new Vector2(-direction.x, direction.y - (spin / initialSpinDivisor));
+            ReduceSpin(1.8f);
             goingLeft = false;
         }
         
         if (transform.position.y > 16 && !goingDown) {
             //Is the ball at the top border and not going down (heading towards the top border)
-            direction = new Vector2(direction.x + (spin / airSpinDivisor), -direction.y);
-            ReduceSpin();
+            direction = new Vector2(direction.x + (spin / initialSpinDivisor), -direction.y);
+            ReduceSpin(1.8f);
             goingDown = true;
         }
         
         if (transform.position.y < -5) {
-            //This is wrong, the paddle is not always at y 0
+            //This works but may take a long time, the paddle is not always at y 0
             ResetBall();
         }
     }
 
-    void OnCollisionEnter(Collision collision) {
-        
-    }
-    
-    void OnTriggerEnter2D(Collider2D collidingObj) {
-        if (collidingObj.gameObject.CompareTag(Tags.BOAT_PADDLE)) {
-            Vector2 ndir = NormalizedDifference(collidingObj);
+    void OnCollisionEnter2D(Collision2D coll) {
+        if (coll.gameObject.CompareTag(Tags.BOAT_PADDLE)) {
+            Vector2 ndir = NormalizedDifference(coll.collider);
 
+            print(":ERE");
             IncreaseSpeed();
 
             var standardBounceDir = new Vector2(direction.x + (ndir.x / 2), ndir.y).normalized;
 
             // Spin
-            var boat = collidingObj.GetComponent<Boat>();
+            var boat = coll.collider.GetComponent<Boat>();
             ReduceSpin();
             spin = spin + (boat.velocity().x / 6);
 
@@ -84,24 +84,30 @@ public class CannonBall : MonoBehaviour {
             UpdateGoingLeftDown(finalVelocity);
             direction = finalVelocity;
             
-        } else if (collidingObj.gameObject.CompareTag(Tags.BLOCK)) {
-            var ndir = NormalizedDifference(collidingObj);
-            
-            
+        } else if (coll.gameObject.CompareTag(Tags.BLOCK)) {    
+            var contacts = coll.contacts[0].normal;
+
             IncreaseSpeed();
 
-            if (ndir.y >= 0.3 || -0.3 >= ndir.y) {
-                direction = new Vector2(direction.x + spin, ndir.y).normalized;
+            print(coll.contacts.Length);
+            if (contacts.y >= 0.8f && goingDown) {
+                direction = new Vector2(direction.x, -direction.y);
             }
-            else {
-                direction = new Vector2(-direction.x + spin, ndir.y).normalized;
+            else if (contacts.y <= -0.8f && !goingDown) {
+                direction = new Vector2(direction.x, -direction.y);
             }
+            
+            if (contacts.x <= -0.8f && !goingLeft) {
+                direction = new Vector2(-direction.x, direction.y);
+            } else if (contacts.x >= 0.8f && goingLeft) {
+                direction = new Vector2(-direction.x, direction.y);
 
+            }
 
             ReduceSpin();
             UpdateGoingLeftDown(direction);
             
-            collidingObj.gameObject.GetComponent<Block>().TakeDamage(this);
+            coll.collider.gameObject.GetComponent<Block>().TakeDamage(this);
         }
     }
 

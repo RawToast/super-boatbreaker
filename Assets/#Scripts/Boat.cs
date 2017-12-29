@@ -40,6 +40,7 @@ public class Boat : MonoBehaviour {
                     new Vector2(rig.velocity.x, rig.velocity.y + 0.05f);
             }
         }
+
     }
 
     private void OnTriggerStay2D(Collider2D collidingObj) { 
@@ -52,6 +53,12 @@ public class Boat : MonoBehaviour {
                 rig.velocity =
                     new Vector2(rig.velocity.x, rig.velocity.y + 0.085f);
             }
+            
+        }
+
+        if (collidingObj.gameObject.CompareTag(Tags.BLOCK)) {
+            Vector2 normalisedDifference = (gameObject.transform.position - collidingObj.transform.position).normalized;
+            
             
         }
     }
