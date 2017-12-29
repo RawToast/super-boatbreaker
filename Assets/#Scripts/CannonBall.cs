@@ -12,7 +12,7 @@ public class CannonBall : MonoBehaviour {
     //this sets the width of walls, these wont move the scene walls YET so just dont fuck with it yet - carlo 
     [SerializeField] private float wallBounds = 5f;
 
-    [SerializeField] private int initialSpinDivisor;
+    [SerializeField] private int onhitSpinDivisor;
     
     [SerializeField] private float airSpinDivisor;
     
@@ -30,14 +30,14 @@ public class CannonBall : MonoBehaviour {
     
     void Update() {
         
-        direction = new Vector2(direction.x + (spin / initialSpinDivisor), direction.y).normalized;
+        direction = new Vector2(direction.x + (spin / onhitSpinDivisor), direction.y).normalized;
         rig.velocity = direction * speed * Time.deltaTime;
         
         ReduceSpin(airSpinDivisor);
         
         if (transform.position.x > wallBounds && !goingLeft) {
             //Is the ball at the right border and is not going left (heading towards the right border)
-            direction = new Vector2(-direction.x, direction.y + (spin / initialSpinDivisor));
+            direction = new Vector2(-direction.x, direction.y + (spin / onhitSpinDivisor));
             ReduceSpin(1.8f);
 
             goingLeft = true;
@@ -45,14 +45,14 @@ public class CannonBall : MonoBehaviour {
         
         if (transform.position.x < -wallBounds && goingLeft) {
             //Is the ball at the left border and is going left (heading towards the left border)
-            direction = new Vector2(-direction.x, direction.y - (spin / initialSpinDivisor));
+            direction = new Vector2(-direction.x, direction.y - (spin / onhitSpinDivisor));
             ReduceSpin(1.8f);
             goingLeft = false;
         }
         
         if (transform.position.y > 16 && !goingDown) {
             //Is the ball at the top border and not going down (heading towards the top border)
-            direction = new Vector2(direction.x + (spin / initialSpinDivisor), -direction.y);
+            direction = new Vector2(direction.x + (spin / onhitSpinDivisor), -direction.y);
             ReduceSpin(1.8f);
             goingDown = true;
         }
@@ -67,7 +67,6 @@ public class CannonBall : MonoBehaviour {
         if (coll.gameObject.CompareTag(Tags.BOAT_PADDLE)) {
             Vector2 ndir = NormalizedDifference(coll.collider);
 
-            print(":ERE");
             IncreaseSpeed();
 
             var standardBounceDir = new Vector2(direction.x + (ndir.x / 2), ndir.y).normalized;
@@ -91,16 +90,16 @@ public class CannonBall : MonoBehaviour {
 
             print(coll.contacts.Length);
             if (contacts.y >= 0.8f && goingDown) {
-                direction = new Vector2(direction.x, -direction.y);
+                direction = new Vector2(direction.x + (spin / onhitSpinDivisor), -direction.y);
             }
             else if (contacts.y <= -0.8f && !goingDown) {
-                direction = new Vector2(direction.x, -direction.y);
+                direction = new Vector2(direction.x + (spin / onhitSpinDivisor), -direction.y);
             }
             
             if (contacts.x <= -0.8f && !goingLeft) {
-                direction = new Vector2(-direction.x, direction.y);
+                direction = new Vector2(-direction.x, direction.y + (spin / onhitSpinDivisor));
             } else if (contacts.x >= 0.8f && goingLeft) {
-                direction = new Vector2(-direction.x, direction.y);
+                direction = new Vector2(-direction.x, direction.y + (spin / onhitSpinDivisor));
 
             }
 

@@ -9,7 +9,7 @@ public class Boat : MonoBehaviour {
     [SerializeField] private float maxXPosition;
     [SerializeField] private bool canMove;
 
-    void Update() {
+    void FixedUpdate() {
         if (canMove) {
             if (Input.GetKey(KeyCode.LeftArrow)) {
                 rig.velocity =
