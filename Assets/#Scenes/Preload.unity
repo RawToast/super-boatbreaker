@@ -112,6 +112,48 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &1063776499
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4555602838142842, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555602838142842, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555602838142842, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555602838142842, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555602838142842, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555602838142842, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555602838142842, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555602838142842, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1688694493
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,65 +234,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1806873437
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4555602838142842, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555602838142842, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555602838142842, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555602838142842, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555602838142842, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555602838142842, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555602838142842, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555602838142842, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 14979d2e3ac7640358d7d470a10e4e24, type: 2}
-  m_IsPrefabParent: 0
---- !u!1 &1806873438 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1451727542358818, guid: 14979d2e3ac7640358d7d470a10e4e24,
-    type: 2}
-  m_PrefabInternal: {fileID: 1806873437}
---- !u!114 &1806873439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1806873438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5f080c6bdf14ddfa3edb5b28a56e2ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lives: 0
-  levelNames:
-  - SimpleLevel
-  - BonusLevel
