@@ -8,18 +8,15 @@ using UnityEngine;
 static class Grd {
     public static Score Score;
     public static Lives Lives;
-//    public static Sfx sfx;
-//    public static Music music;
-//    public static Scoring scoring;
-//   
+    public static Level Level;
+    
     static Grd() {
         GameObject g = safeFind("App");
 
-//        sfx = (Sfx)SafeComponent( g, "Sfx" );
         Score = (Score)SafeComponent( g, "Score" );
         Lives = (Lives)SafeComponent( g, "Lives" );
-//        music = (Music)SafeComponent( g, "Music" );
-//        scoring = (Scoring)SafeComponent( g, "Music" );
+        Level = (Level) SafeComponent(g, "Level");
+        
         #if UNITY_EDITOR
             Application.LoadLevel(System.IO.Path.GetFileNameWithoutExtension(EditorPrefs.GetString("SceneAutoLoader.PreviousScene")));
         #endif

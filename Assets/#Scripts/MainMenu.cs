@@ -3,7 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
     public void PlayButton() {
-        SceneManager.LoadScene("Main");
+        Grd.Level.ResetLevels();
+        Grd.Level.NextLevel();
     }
 
     public void QuitButton() {

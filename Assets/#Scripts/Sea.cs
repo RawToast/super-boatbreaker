@@ -29,10 +29,10 @@ public class Sea : MonoBehaviour {
 
         if (waveCounter >= (waveTimer + waveSize)) {
             rig.velocity = Vector2.zero;
-            waveCounter = 0;
+            waveCounter = -dipSize;
         } else if (waveCounter >= waveTimer) {
             rig.velocity = new Vector2(0, waveVelocity);
-        } else if (dipSize >= waveCounter) {
+        } else if (0 >= waveCounter) {
             rig.velocity = new Vector2(0, dipVelocity);
         } else {
             rig.velocity = new Vector2(0, baseVelocity);
