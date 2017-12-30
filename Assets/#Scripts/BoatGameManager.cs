@@ -9,3 +9,4 @@ public class BoatGameManager : MonoBehaviour {
         score = score + amountToIncrementBy;
     }
 }
+
