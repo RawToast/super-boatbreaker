@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class CannonBall : MonoBehaviour {
@@ -15,21 +14,32 @@ public class CannonBall : MonoBehaviour {
     [SerializeField] private int onhitSpinDivisor;
     
     [SerializeField] private float airSpinDivisor;
-    
-    private Vector2 direction;
+
+    public Vector2 direction;
     private bool goingLeft;
     private bool goingDown;
 
     private float spin = 0;
-   
-    void Start() {
+
+
+    // There has to be a better way of doing this (using the values from the prefab?)
+    public void SetValuesToDefaults() {
+        direction = Vector2.down;
+        spin = 0f;
+        goingDown = true;
+        goingLeft = false;
+        onhitSpinDivisor = 80;
+        airSpinDivisor = 1.003f;
+    }
+    
+    public void Start() {
         PlaceBallInCenterHeadingDown();
        
         StartCoroutine("ResetBallWaiter");
     }
     
     void Update() {
-        
+        print("Direction: " + direction + " spin: " + spin + " div: " + onhitSpinDivisor);
         direction = new Vector2(direction.x + (spin / onhitSpinDivisor), direction.y).normalized;
         rig.velocity = direction * speed * Time.deltaTime;
         
@@ -59,7 +69,7 @@ public class CannonBall : MonoBehaviour {
         
         if (transform.position.y < -5) {
             //This works but may take a long time, the paddle is not always at y 0
-            ResetBall();
+            Destroy(this);
         }
     }
 
@@ -129,19 +139,19 @@ public class CannonBall : MonoBehaviour {
             spin = spin / divisor;
     }
    
-    //Called when the ball goes underneath the paddle and "dies"
-    public void ResetBall() {
-        transform.position = Vector3.zero; //put ball in the middle of the screen
-        direction = Vector2.down;
-        StartCoroutine("ResetBallWaiter");
-
-        //manager.LiveLost(); //Calls the 'LiveLost()' function in the GameManager function
-        //sacked this off for now as remaking gamemanager - c
-    }
+//    //Called when the ball goes underneath the paddle and "dies"
+//    public void ResetBall() {
+//        transform.position = Vector3.zero; //put ball in the middle of the screen
+//        direction = Vector2.down;
+//        StartCoroutine("ResetBallWaiter");
+//
+//        //manager.LiveLost(); //Calls the 'LiveLost()' function in the GameManager function
+//        //sacked this off for now as remaking gamemanager - c
+//    }
 
     
     private void PlaceBallInCenterHeadingDown() {
-        transform.position = Vector3.zero;
+        //transform.position = Vector3.zero;
         direction = Vector2.down;
     }
     

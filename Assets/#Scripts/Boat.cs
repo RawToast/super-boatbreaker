@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Rendering;
 
 public class Boat : MonoBehaviour {
@@ -9,6 +10,10 @@ public class Boat : MonoBehaviour {
     [SerializeField] private float maxXPosition;
     [SerializeField] private bool canMove;
 
+    [SerializeField] private CannonBall ball;
+
+    private float lastFired;
+    
     void FixedUpdate() {
         if (canMove) {
             if (Input.GetKey(KeyCode.LeftArrow)) {
@@ -26,6 +31,20 @@ public class Boat : MonoBehaviour {
             transform.position =
                 new Vector3(Mathf.Clamp(transform.position.x, minXPosition, maxXPosition), 
                     transform.position.y, 0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+
+            if (Math.Abs(lastFired - Time.time) > 0.1f) {
+                lastFired = Time.time;
+                var trans = transform.position;
+
+                var newBall = Instantiate(ball, new Vector3(trans.x, trans.y + 0.1f), Quaternion.identity);
+
+                newBall.SetValuesToDefaults();
+                
+                newBall.Start();
+            }
         }
     }
 
