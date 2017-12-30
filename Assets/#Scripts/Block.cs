@@ -8,6 +8,7 @@ public class Block : MonoBehaviour {
 		// Maybe use ball speed?
 		blockHp = blockHp - 1;
 		if (blockHp <= 0) {
+			Grd.Score.IncrementScore(1);
 			Destroy(gameObject);
 		}
 	}

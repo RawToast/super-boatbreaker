@@ -9,5 +9,11 @@ EditorBuildSettings:
     path: Assets/#Scenes/Menu.unity
     guid: b9d82c6f3054844d4bff1e40e910581e
   - enabled: 1
+    path: Assets/#Scenes/Preload.unity
+    guid: 9cad211a74bc3434291ae70fa3b6bc7b
+  - enabled: 1
     path: Assets/#Scenes/Main.unity
     guid: 49174b43d9ef07843844e80b20a36361
+  - enabled: 1
+    path: Assets/#Scenes/BonusLevel.unity
+    guid: 2074360225f124f28827d281c64fa7f0

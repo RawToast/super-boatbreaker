@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Util;
 
 public class Boat : MonoBehaviour {
     public float speed;
@@ -13,7 +14,7 @@ public class Boat : MonoBehaviour {
     [SerializeField] private CannonBall ball;
 
     private float lastFired;
-    
+
     void FixedUpdate() {
         if (canMove) {
             if (Input.GetKey(KeyCode.LeftArrow)) {
@@ -29,21 +30,24 @@ public class Boat : MonoBehaviour {
             }
 
             transform.position =
-                new Vector3(Mathf.Clamp(transform.position.x, minXPosition, maxXPosition), 
+                new Vector3(Mathf.Clamp(transform.position.x, minXPosition, maxXPosition),
                     transform.position.y, 0);
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) {
-
             if (Math.Abs(lastFired - Time.time) > 0.1f) {
-                lastFired = Time.time;
-                var trans = transform.position;
+                if (Grd.Lives.HasLifes()) {
+                    Grd.Lives.TakeLife();
 
-                var newBall = Instantiate(ball, new Vector3(trans.x, trans.y + 0.1f), Quaternion.identity);
+                    lastFired = Time.time;
+                    var trans = transform.position;
 
-                newBall.SetValuesToDefaults();
-                
-                newBall.Start();
+                    var newBall = Instantiate(ball, new Vector3(trans.x, trans.y + 0.5f), Quaternion.identity);
+
+                    newBall.SetValuesToDefaults();
+                    newBall.direction = Vector2.up;
+                    newBall.Start();
+                }
             }
         }
     }
@@ -59,10 +63,9 @@ public class Boat : MonoBehaviour {
                     new Vector2(rig.velocity.x, rig.velocity.y + 0.05f);
             }
         }
-
     }
 
-    private void OnTriggerStay2D(Collider2D collidingObj) { 
+    private void OnTriggerStay2D(Collider2D collidingObj) {
         if (collidingObj.gameObject.CompareTag(Tags.SEA)) {
             if (rig.velocity.y < 0) {
                 rig.velocity =
@@ -72,13 +75,10 @@ public class Boat : MonoBehaviour {
                 rig.velocity =
                     new Vector2(rig.velocity.x, rig.velocity.y + 0.085f);
             }
-            
         }
 
         if (collidingObj.gameObject.CompareTag(Tags.BLOCK)) {
             Vector2 normalisedDifference = (gameObject.transform.position - collidingObj.transform.position).normalized;
-            
-            
         }
     }
 

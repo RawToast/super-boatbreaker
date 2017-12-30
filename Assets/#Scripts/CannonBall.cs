@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Util;
 
 public class CannonBall : MonoBehaviour {
     
@@ -39,7 +40,7 @@ public class CannonBall : MonoBehaviour {
     }
     
     void Update() {
-        print("Direction: " + direction + " spin: " + spin + " div: " + onhitSpinDivisor);
+//        print("Direction: " + direction + " spin: " + spin + " div: " + onhitSpinDivisor);
         direction = new Vector2(direction.x + (spin / onhitSpinDivisor), direction.y).normalized;
         rig.velocity = direction * speed * Time.deltaTime;
         
@@ -98,7 +99,6 @@ public class CannonBall : MonoBehaviour {
 
             IncreaseSpeed();
 
-            print(coll.contacts.Length);
             if (contacts.y >= 0.8f && goingDown) {
                 direction = new Vector2(direction.x + (spin / onhitSpinDivisor), -direction.y);
             }
@@ -162,7 +162,7 @@ public class CannonBall : MonoBehaviour {
     private IEnumerator ResetBallWaiter() {
         speed = 0;
         spin = 0;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.2f);
         speed = 200;
     }
     
