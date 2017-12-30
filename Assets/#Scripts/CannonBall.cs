@@ -125,7 +125,7 @@ public class CannonBall : MonoBehaviour {
     }
 
     private void IncreaseSpeed() {
-        var newSpeed = speed + 5;
+        var newSpeed = speed + 4;
         if (maxSpeed >= newSpeed)
             speed = newSpeed;
     }
