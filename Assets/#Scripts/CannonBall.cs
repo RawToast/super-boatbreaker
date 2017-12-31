@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Net.NetworkInformation;
 using UnityEngine;
 using Util;
 
@@ -78,10 +80,20 @@ public class CannonBall : MonoBehaviour {
         if (coll.gameObject.CompareTag(Tags.BOAT_PADDLE)) {
             Vector2 ndir = NormalizedDifference(coll.collider);
 
+            var contacts = coll.contacts[0].normal;
+            
             IncreaseSpeed();
 
             var standardBounceDir = new Vector2(direction.x + (ndir.x / 2), ndir.y).normalized;
 
+            if (contacts.x <= -0.7f && !goingLeft) {
+                standardBounceDir = new Vector2(-standardBounceDir.x, standardBounceDir.y + (spin / onhitSpinDivisor));
+            }
+            else if (contacts.x >= 0.7f && goingLeft) {
+                standardBounceDir = new Vector2(-standardBounceDir.x, standardBounceDir.y + (spin / onhitSpinDivisor));
+
+            }
+//1.0, -0.1
             // Spin
             var boat = coll.collider.GetComponent<Boat>();
             ReduceSpin();
@@ -94,10 +106,44 @@ public class CannonBall : MonoBehaviour {
             UpdateGoingLeftDown(finalVelocity);
             direction = finalVelocity;
             
-        } else if (coll.gameObject.CompareTag(Tags.BLOCK)) {    
+        } else if (coll.gameObject.CompareTag(Tags.BLOCK)) {
+            var contacts = coll.contacts[0].normal;
+
+            
+            IncreaseSpeed();
+
+            var blk = coll.collider.gameObject.GetComponent<Block>();
+
+            if (Math.Abs(contacts.x - contacts.y) < 0.1f|| Math.Abs(contacts.x + contacts.y) < 0.1f) {
+                direction = -direction;
+                blk.TakeDamage(this);
+            } else {
+                if (contacts.y >= 0.7f && goingDown) {
+                    direction = new Vector2(direction.x + (spin / onhitSpinDivisor), -direction.y);
+                    blk.TakeDamage(this);
+                }
+                else if (contacts.y <= -0.7f && !goingDown) {
+                    direction = new Vector2(direction.x + (spin / onhitSpinDivisor), -direction.y);
+                    blk.TakeDamage(this);
+                }
+                if (contacts.x <= -0.7f && !goingLeft) {
+                    direction = new Vector2(-direction.x, direction.y + (spin / onhitSpinDivisor));
+                    blk.TakeDamage(this);
+                }
+                else if (contacts.x >= 0.7f && goingLeft) {
+                    direction = new Vector2(-direction.x, direction.y + (spin / onhitSpinDivisor));
+                    blk.TakeDamage(this);
+                }
+            }
+
+            ReduceSpin();
+            UpdateGoingLeftDown(direction);
+
+        } else if (coll.gameObject.CompareTag(Tags.CANNONBALL)) {
             var contacts = coll.contacts[0].normal;
 
             IncreaseSpeed();
+            
 
             if (contacts.y >= 0.8f && goingDown) {
                 direction = new Vector2(direction.x + (spin / onhitSpinDivisor), -direction.y);
@@ -105,27 +151,27 @@ public class CannonBall : MonoBehaviour {
             else if (contacts.y <= -0.8f && !goingDown) {
                 direction = new Vector2(direction.x + (spin / onhitSpinDivisor), -direction.y);
             }
-            
+
             if (contacts.x <= -0.8f && !goingLeft) {
                 direction = new Vector2(-direction.x, direction.y + (spin / onhitSpinDivisor));
-            } else if (contacts.x >= 0.8f && goingLeft) {
+            }
+            else if (contacts.x >= 0.8f && goingLeft) {
                 direction = new Vector2(-direction.x, direction.y + (spin / onhitSpinDivisor));
 
             }
 
             ReduceSpin();
             UpdateGoingLeftDown(direction);
-            
-            coll.collider.gameObject.GetComponent<Block>().TakeDamage(this);
-        }
-    }
+
+        } 
+    } 
 
     private Vector2 NormalizedDifference(Collider2D otherCollider2D) {
         return (gameObject.transform.position - otherCollider2D.transform.position).normalized;
     }
 
     private void IncreaseSpeed() {
-        var newSpeed = speed + 4;
+        var newSpeed = speed + 3;
         if (maxSpeed >= newSpeed)
             speed = newSpeed;
     }

@@ -15,7 +15,7 @@ static class Grd {
 
         Score = (Score)SafeComponent( g, "Score" );
         Lives = (Lives)SafeComponent( g, "Lives" );
-        Level = (Level) SafeComponent(g, "Level");
+        Level = (Level)SafeComponent(g, "Level");
         
         #if UNITY_EDITOR
             Application.LoadLevel(System.IO.Path.GetFileNameWithoutExtension(EditorPrefs.GetString("SceneAutoLoader.PreviousScene")));

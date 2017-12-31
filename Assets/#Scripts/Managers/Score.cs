@@ -11,7 +11,7 @@ namespace Managers {
 
         public void IncrementScore(int amountToIncrementBy) {
             score = score + amountToIncrementBy;
-            print("Score: " + score);
+            //print("Score: " + score);
         }
 
         public int GetScore() {
